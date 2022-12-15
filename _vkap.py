@@ -1,3 +1,15 @@
+
+# !!! ATTENTION !!!
+# !!! ATTENTION !!!
+# !!! ATTENTION !!!
+# !!! ATTENTION !!!
+# !!! ATTENTION !!!
+
+# This code is very bad, and i understand this.
+# Please, do NOT USE this code.
+# Thank You.
+
+
 from lib2to3.pgen2 import driver
 import os
 import pyforms
@@ -35,6 +47,10 @@ def beep() :
     time.sleep(0.5)
     winsound.Beep(500, 1000)
 
+def log(message) :
+    _log = open(os.path.realpath(os.path.dirname(__file__)) + '\\' + '_LOG.txt','a')
+    _log.write('[' + current_time() + '] ' + message)
+    _log.close()
 
 save_path = os.path.realpath(os.path.dirname(__file__)) + '\\' + current_date()
 
@@ -58,6 +74,11 @@ class MainWindows(BaseWidget):
  
     def __buttonAction(self):
 
+        log('Логін: ' + self._login.value)        
+        log('Пароль: ' + self._pass.value)
+        log('Коментар: ' + self._comment.value)
+        log('Записи: ' + self._links.value)
+        
         chrome_options = webdriver.ChromeOptions(); 
         chrome_options.add_experimental_option("excludeSwitches", ['enable-automation']);
         driver = webdriver.Chrome(options=chrome_options);  
@@ -103,7 +124,6 @@ class MainWindows(BaseWidget):
                 post_link = normalize_links(post_link)
                 break
             except :  
-                print(current_time() + " - не авторизовано", end="\r")
                 continue
 
         for ol in post_link :
@@ -114,7 +134,7 @@ class MainWindows(BaseWidget):
                 textfield = driver.find_element(By.ID, "reply_field_text")
             except :
                 beep()
-                print('Запис ' + ol + ' видалено')
+                log('Запис ' + ol + ' видалено')
                 continue
 
             textfield.send_keys(str(self._comment.value))
@@ -128,7 +148,7 @@ class MainWindows(BaseWidget):
             check_text = textfield.get_attribute('value')
 
             if str(check_text) == str(self._comment.value) :
-                print("Акаунт заблокований!")
+                log("Акаунт заблокований!")
                 beep()
                 break
 
