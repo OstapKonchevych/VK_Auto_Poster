@@ -145,15 +145,26 @@ class MainWindows(BaseWidget):
             time.sleep(3)
 
             #Перевірити чи акаунт заблокований
-            textfield = driver.find_element(By.ID, "reply_field_text")
-            check_text = textfield.get_attribute('value')
+            try :
+                textfield = driver.find_element(By.ID, "reply_field_text")
+                check_text = textfield.get_attribute('value')
 
-            if str(check_text) == str(self._comment.value) :
-                print("Акаунт заблокований!")
+                if str(check_text) == str(self._comment.value) :
+                    print("Акаунт заблокований!")
+                    beep()
+                    break
+            except :
+                pass
+
+            #Перевірити чи є капча
+            try :
+                capcha = driver.find_element(By.CLASS_NAME, "captcha_form")
+                print('Captcha!!')
                 beep()
-                break
+                time.sleep(60)
+            except :
+                pass 
 
-            #Перевірити чи є капча 
              
 
             #like_reaction = driver.find_element(By.CLASS_NAME, "ReactionImage__animationContainer")
