@@ -48,10 +48,10 @@ def beep() :
     winsound.Beep(500, 1000)
 
 def log(message) :
-    _log = open(os.path.realpath(os.path.dirname(__file__)) + '\\' + '_log.txt','a')
-    _log.write('[' + current_time() + '] ' + message)
-    _log.close()
-    print(message)
+#    _log = open(os.path.realpath(os.path.dirname(__file__)) + '\\' + '_LOG.txt','a')
+#    _log.write('[' + current_time() + '] ' + message)
+#    _log.close()
+    pass
 
 save_path = os.path.realpath(os.path.dirname(__file__)) + '\\' + current_date()
 
@@ -75,10 +75,10 @@ class MainWindows(BaseWidget):
  
     def __buttonAction(self):
 
-        log('Логін: ' + self._login.value)        
-        log('Пароль: ' + self._pass.value)
-        log('Коментар: ' + self._comment.value)
-        log('Записи: ' + self._links.value)
+        #log('Логін: ' + self._login.value)        
+        #log('Пароль: ' + self._pass.value)
+        #log('Коментар: ' + self._comment.value)
+        #log('Записи: ' + self._links.value)
         
         chrome_options = webdriver.ChromeOptions(); 
         chrome_options.add_experimental_option("excludeSwitches", ['enable-automation']);
@@ -135,7 +135,7 @@ class MainWindows(BaseWidget):
                 textfield = driver.find_element(By.ID, "reply_field_text")
             except :
                 beep()
-                log('Запис ' + ol + ' видалено')
+                print('Запис ' + ol + ' видалено')
                 continue
 
             textfield.send_keys(str(self._comment.value))
@@ -149,7 +149,7 @@ class MainWindows(BaseWidget):
             check_text = textfield.get_attribute('value')
 
             if str(check_text) == str(self._comment.value) :
-                log("Акаунт заблокований!")
+                print("Акаунт заблокований!")
                 beep()
                 break
 
