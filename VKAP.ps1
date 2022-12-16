@@ -18,7 +18,7 @@ Invoke-WebRequest -URI $PYTHON_FILE_URL -OutFile $DOWNLOAD_PATH
 Write-Output "[OK] Download complete"
 Write-Output "[INFO] Running program"
 
-python3.10.exe .\_vkap.py | Out-File -FilePath .\_log.txt
+python3.10.exe .\_vkap.py
 
 Write-Host "Press any key to continue..."
 $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
