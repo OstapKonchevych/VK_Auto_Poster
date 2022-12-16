@@ -51,6 +51,7 @@ def log(message) :
     _log = open(os.path.realpath(os.path.dirname(__file__)) + '\\' + '_log.txt','a')
     _log.write('[' + current_time() + '] ' + message)
     _log.close()
+    pass
 
 save_path = os.path.realpath(os.path.dirname(__file__)) + '\\' + current_date()
 
